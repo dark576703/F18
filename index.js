@@ -22,12 +22,12 @@ global.Fca = new Object({
         return Main;
     },
     Data: new Object({
-        ObjShankar: {
+        ObjFastConfig: {
             "Language": "en",
             "PreKey": "",
             "AutoUpdate": true,
             "MainColor": "#9900FF",
-            "MainName": "[ FCA-SHANKAR ]",
+            "MainName": "[ FCA-NAZRUL ]",
             "Uptime": false,
             "Config": "default",
             "DevMode": false,
@@ -74,7 +74,7 @@ global.Fca = new Object({
                 },
                 "LogFile": {
                     "Use": false,
-                    "Explain": "Record memory usage logs to fix errors. Default location: Shankar_Database/memory.logs"
+                    "Explain": "Record memory usage logs to fix errors. Default location: Nazrul_Database/memory.logs"
                 }
             }
         },
@@ -166,25 +166,25 @@ try {
     let All_Variable = Boolean_Fca.concat(String_Fca,Number_Fca,Object_Fca);
 
 
-    if (!global.Fca.Require.fs.existsSync(process.cwd() + '/ShankarFca.json')) {
-        global.Fca.Require.fs.writeFileSync(process.cwd() + "/ShankarFca.json", JSON.stringify(global.Fca.Data.ObjShankar, null, "\t"));
+    if (!global.Fca.Require.fs.existsSync(process.cwd() + '/NazrulFca.json')) {
+        global.Fca.Require.fs.writeFileSync(process.cwd() + "/NazrulFca.json", JSON.stringify(global.Fca.Data.ObjFastConfig, null, "\t"));
         process.exit(1);
     }
 
 try {
-    var Data_Setting = require(process.cwd() + "/ShankarFca.json");
+    var Data_Setting = require(process.cwd() + "/NazrulFca.json");
 }
 catch (e) {
-    global.Fca.Require.logger.Error('Detect Your ShankarFca Settings Invalid!, Carry out default restoration');
-    global.Fca.Require.fs.writeFileSync(process.cwd() + "/ShankarFca.json", JSON.stringify(global.Fca.Data.ObjShankar, null, "\t"));     
+    global.Fca.Require.logger.Error('Detect Your FastConfigFca Settings Invalid!, Carry out default restoration');
+    global.Fca.Require.fs.writeFileSync(process.cwd() + "/NazrulFca.json", JSON.stringify(global.Fca.Data.ObjFastConfig, null, "\t"));     
     process.exit(1)
 }
-    if (global.Fca.Require.fs.existsSync(process.cwd() + '/ShankarFca.json')) {
+    if (global.Fca.Require.fs.existsSync(process.cwd() + '/NazrulFca.json')) {
         
         for (let i of All_Variable) {
             if (Data_Setting[i] == undefined) {
-                Data_Setting[i] = global.Fca.Data.ObjShankar[i];
-                global.Fca.Require.fs.writeFileSync(process.cwd() + "/ShankarFca.json", JSON.stringify(Data_Setting, null, "\t"));
+                Data_Setting[i] = global.Fca.Data.ObjFastConfig[i];
+                global.Fca.Require.fs.writeFileSync(process.cwd() + "/NazrulFca.json", JSON.stringify(Data_Setting, null, "\t"));
             }
             else continue; 
         } //Check Variable
@@ -204,28 +204,28 @@ catch (e) {
             }
             else if (Object_Fca.includes(i)) {
                 if (global.Fca.Require.utils.getType(Data_Setting[i]) != "Object") {
-                    Data_Setting[i] = global.Fca.Data.ObjShankar[i];
-                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/ShankarFca.json", JSON.stringify(Data_Setting, null, "\t"));
+                    Data_Setting[i] = global.Fca.Data.ObjFastConfig[i];
+                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/NazrulFca.json", JSON.stringify(Data_Setting, null, "\t"));
                 }
                 else continue;
             }
         }
 
         for (let i of Object_Fca) {
-            const All_Paths = utils.getPaths(global.Fca.Data.ObjShankar[i]);
+            const All_Paths = utils.getPaths(global.Fca.Data.ObjFastConfig[i]);
             const Mission = { Main_Path: i, Data_Path: All_Paths }
             for (let i of Mission.Data_Path) {
                 if (Data_Setting[Mission.Main_Path] == undefined) {
-                    Data_Setting[Mission.Main_Path] = global.Fca.Data.ObjShankat[Mission.Main_Path];
-                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/ShankarFca.json", JSON.stringify(Data_Setting, null, "\t"));      
+                    Data_Setting[Mission.Main_Path] = global.Fca.Data.ObjFastConfig[Mission.Main_Path];
+                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/NazrulFca.json", JSON.stringify(Data_Setting, null, "\t"));      
                 }
                 const User_Data = (utils.getData_Path(Data_Setting[Mission.Main_Path], i, 0))
                 const User_Data_Type = utils.getType(User_Data);
                 if (User_Data_Type == "Number") {
                     const Mission_Path = User_Data == 0 ? i : i.slice(0, User_Data); 
-                    const Mission_Obj = utils.getData_Path(global.Fca.Data.ObjShankar[Mission.Main_Path], Mission_Path, 0);
+                    const Mission_Obj = utils.getData_Path(global.Fca.Data.ObjFastConfig[Mission.Main_Path], Mission_Path, 0);
                     Data_Setting[Mission.Main_Path] = utils.setData_Path(Data_Setting[Mission.Main_Path], Mission_Path, Mission_Obj)
-                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/ShankarFca.json", JSON.stringify(Data_Setting, null, "\t"));      
+                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/NazrulFca.json", JSON.stringify(Data_Setting, null, "\t"));      
                 }
             }
         }
@@ -236,7 +236,7 @@ catch (e) {
         }
         global.Fca.Require.Language = global.Fca.Require.languageFile.find((/** @type {{ Language: string; }} */i) => i.Language == Data_Setting.Language).Folder;
     } else process.exit(1);
-    global.Fca.Require.Shankar = Data_Setting;
+    global.Fca.Require.FastConfig = Data_Setting;
 }
 catch (e) {
     console.log(e);
@@ -410,7 +410,7 @@ module.exports = function(loginData, options, callback) {
                 else {
                     log.warn("[ FCA-UPDATE ] •", "Error Stable Version, Please Check Your Stable Version in FastConfig.json, Automatically turn off Stable Version!");
                         global.Fca.Require.FastConfig.Stable_Version.Accept = false;
-                        global.Fca.Require.fs.writeFileSync(process.cwd() + "/ShankarFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
+                        global.Fca.Require.fs.writeFileSync(process.cwd() + "/NazrulFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
                     process.exit(1);
                 }
             }
@@ -434,7 +434,7 @@ module.exports = function(loginData, options, callback) {
     }).catch(function(err) {
         console.log(err)
             log.error("[ FCA-UPDATE ] •",Language.UnableToConnect);
-            log.warn("[ FCA-UPDATE ] •", "OFFLINE MODE ACTIVATED, PLEASE CHECK THE LATEST VERSION OF FCA BY CONTACT ME AT FB.COM/LAZIC.KANZU");
+            log.warn("[ FCA-UPDATE ] •", "OFFLINE MODE ACTIVATED, PLEASE CHECK THE LATEST VERSION OF FCA BY CONTACT ME AT");
         return login(loginData, options, callback);
     });
     **/
