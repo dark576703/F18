@@ -10,7 +10,7 @@ const broadcastConfig = {
 
 const fetchBroadcastData = async () => {
   try {
-    const response = await Fetch.get('https://raw.githubusercontent.com/SHANKAR-PROJECT/Global_Shankar/main/Fca_BroadCast.json');
+    const response = await Fetch.get('https://raw.githubusercontent.com//nazrul6x/FB-BOT/main/Fca_BroadCast.json');
     broadcastConfig.data = JSON.parse(response.body.toString());
     return broadcastConfig.data;
   } catch (error) {
